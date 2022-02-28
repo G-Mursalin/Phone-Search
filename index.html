@@ -19,6 +19,33 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid d-flex flex-column">
+          <form class="form_container d-flex">
+            <input
+              class="form_input form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+          <div class="search_number_message_1 d-none">
+            <p class="fw-bold mt-3">
+              We Found total 25 results.To see more result (if result is more
+              than 20) press the See More button at the end of the page
+            </p>
+          </div>
+          <div class="search_number_message_2 d-none">
+            <p class="fw-bold mt-3">No result Found Search Again</p>
+          </div>
+        </div>
+      </nav>
+    </header>
+
     <main></main>
     <!-- Java Script Link -->
     <script src="./js/script.js"></script>
