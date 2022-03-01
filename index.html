@@ -21,7 +21,7 @@
   <body>
     <header>
       <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid d-flex flex-column">
+        <div class="container d-flex flex-column">
           <form class="form_container d-flex">
             <input
               class="form_input form-control me-2"
@@ -33,20 +33,27 @@
               Search
             </button>
           </form>
-          <div class="search_number_message_1 d-none">
+          <div class="search_message-1 d-none">
             <p class="fw-bold mt-3">
-              We Found total 25 results.To see more result (if result is more
-              than 20) press the See More button at the end of the page
+              <span class="num_of_result">25</span> results founded.To see more
+              result (if result is more than 20) press the See More button at
+              the end of the page
             </p>
           </div>
-          <div class="search_number_message_2 d-none">
-            <p class="fw-bold mt-3">No result Found Search Again</p>
+          <div class="search_message-2 d-none">
+            <p class="fw-bold mt-3">No result Found. Search Again</p>
           </div>
         </div>
       </nav>
     </header>
 
-    <main></main>
+    <main style="background-color: #d9d5ef">
+      <div class="container mt-5">
+        <div
+          class="card_container row row-cols-md-3 row-cols-sm-2 row-cols-1 g-5"
+        ></div>
+      </div>
+    </main>
     <!-- Java Script Link -->
     <script src="./js/script.js"></script>
   </body>
