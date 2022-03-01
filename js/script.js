@@ -8,7 +8,13 @@ const searchMessage1 = document.querySelector(".search_message-1");
 const searchMessage2 = document.querySelector(".search_message-2");
 const numOfResult = document.querySelector(".num_of_result");
 const cardContainer = document.querySelector(".card_container");
-
+const detailsPhoneName = document.querySelector(".details_phone_name");
+const detailsPhoneImg = document.querySelector(".details_phone_img");
+const releaseDateEl = document.querySelector(".releaseDate");
+const storageEl = document.querySelector(".storage");
+const displaySizeEl = document.querySelector(".displaySize");
+const chipSetEl = document.querySelector(".chipSet");
+const memoryEl = document.querySelector(".memory");
 // Handler For formContainer
 formContainer.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -57,9 +63,34 @@ const showDataUI = (dataReceived) => {
   firstTwentyData(data.slice(0, 20));
 };
 
+//Set Data to UI
+const setDataUI = (element, data, text) => {
+  data
+    ? (element.textContent = data)
+    : (element.textContent = `No ${text} data Found`);
+};
+
 // Details Data Show In Modal
 const showDetailsData = (dataReceived) => {
-  console.log(dataReceived);
+  const { data } = dataReceived;
+  const { name, image, releaseDate } = data;
+  const { storage, displaySize, chipSet, memory, sensors } = data.mainFeatures;
+  console.log(data);
+
+  detailsPhoneName.textContent = name;
+  //Set Image Data to UI
+  detailsPhoneImg.setAttribute("src", `${image}`);
+  detailsPhoneImg.setAttribute("alt", `${image}`);
+  // Set Release Date to UI
+  setDataUI(releaseDateEl, releaseDate, "Release Date");
+  //Set Chip Set to UI
+  setDataUI(chipSetEl, chipSet, "Chip Set");
+  // Set Display Size Data to UI
+  setDataUI(displaySizeEl, displaySize, "Display Size");
+  // Set Memory Data to UI
+  setDataUI(memoryEl, memory, "Memory");
+  // Set Storage Data to UI
+  setDataUI(storageEl, storage, "Storage");
 };
 
 // First 20 Data Show to UI
