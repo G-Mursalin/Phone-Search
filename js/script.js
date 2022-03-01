@@ -63,6 +63,7 @@ const showDataUI = (dataReceived) => {
   if (data.length > 20) {
     // extraDataShow(data.slice(20));
     extraData = data.slice(20);
+    btnSeeAll.classList.toggle("d-none");
   }
   firstTwentyData(data.slice(0, 20));
 };
@@ -76,7 +77,10 @@ const setDataUI = (element, data, text) => {
 
 // Details Data Show In Modal
 const showDetailsData = (dataReceived) => {
+  sensorsEl.textContent = "";
+  othersInfoEl.textContent = "";
   const { data } = dataReceived;
+  console.log(data);
   const { name, image, releaseDate, others } = data;
   const { storage, displaySize, chipSet, memory, sensors } = data.mainFeatures;
 
@@ -145,6 +149,11 @@ const creatHTML = (val) => {
 </div>`;
 };
 
+// Add Card To UI
+const addCard = (createdHtml) => {
+  cardContainer.insertAdjacentHTML("beforeend", createdHtml);
+};
+
 // First 20 Data Show to UI
 const firstTwentyData = (firstTwentyDataArray) => {
   // Reset
@@ -153,8 +162,8 @@ const firstTwentyData = (firstTwentyDataArray) => {
   firstTwentyDataArray.forEach((val) => {
     createdHtml += creatHTML(val);
   });
-  cardContainer.insertAdjacentHTML("beforeend", createdHtml);
-  btnSeeAll.classList.toggle("d-none");
+
+  addCard(createdHtml);
 };
 
 // Show All Data
@@ -164,6 +173,6 @@ btnSeeAll.addEventListener("click", () => {
     createdHtml += creatHTML(val);
   });
 
-  cardContainer.insertAdjacentHTML("beforeend", createdHtml);
+  addCard(createdHtml);
   btnSeeAll.classList.toggle("d-none");
 });
