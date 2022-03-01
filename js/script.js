@@ -15,6 +15,8 @@ const storageEl = document.querySelector(".storage");
 const displaySizeEl = document.querySelector(".displaySize");
 const chipSetEl = document.querySelector(".chipSet");
 const memoryEl = document.querySelector(".memory");
+const sensorsEl = document.querySelector(".sensors");
+const othersInfoEl = document.querySelector(".othersInfo");
 // Handler For formContainer
 formContainer.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -73,7 +75,7 @@ const setDataUI = (element, data, text) => {
 // Details Data Show In Modal
 const showDetailsData = (dataReceived) => {
   const { data } = dataReceived;
-  const { name, image, releaseDate } = data;
+  const { name, image, releaseDate, others } = data;
   const { storage, displaySize, chipSet, memory, sensors } = data.mainFeatures;
   console.log(data);
 
@@ -91,6 +93,23 @@ const showDetailsData = (dataReceived) => {
   setDataUI(memoryEl, memory, "Memory");
   // Set Storage Data to UI
   setDataUI(storageEl, storage, "Storage");
+  // Set Sensors Data to UI
+  sensors.forEach((val) => {
+    const html = `
+     <li>${val}</li>
+    `;
+    sensorsEl.insertAdjacentHTML("beforeend", html);
+  });
+  // Set Others Data to UI
+  const othersDataArray = Object.entries(others);
+
+  othersDataArray.forEach((val) => {
+    const html = `
+      <p class="mb-0">${val[0]}:</p>
+      <p class="ms-3">${val[1]}</p>
+    `;
+    othersInfoEl.insertAdjacentHTML("beforeend", html);
+  });
 };
 
 // First 20 Data Show to UI
