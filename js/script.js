@@ -1,5 +1,6 @@
 "use strict";
-
+// BASE API URL
+const BASE_URL = "https://openapi.programming-hero.com/api/";
 // Selectors
 const formContainer = document.querySelector(".form_container");
 const formInput = document.querySelector(".form_input");
@@ -7,26 +8,32 @@ const searchMessage1 = document.querySelector(".search_message-1");
 const searchMessage2 = document.querySelector(".search_message-2");
 const numOfResult = document.querySelector(".num_of_result");
 const cardContainer = document.querySelector(".card_container");
+
 // Handler For formContainer
 formContainer.addEventListener("submit", (e) => {
   e.preventDefault();
-
-  loadData(formInput.value.toLowerCase());
+  loadData(`phones?search=${formInput.value.toLowerCase()}`);
 
   formInput.value = "";
 });
 
+// Handler For  cardContainer
+cardContainer.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("btn_detail")) return;
+
+  loadData(`phone/${e.target.getAttribute("id")}`);
+});
+
 // Load Data From API
-const loadData = async (searchText) => {
-  // Reset
-  cardContainer.textContent = "";
-  const response = await fetch(
-    `https://openapi.programming-hero.com/api/phones?search=${searchText}`
-  );
+const loadData = async (searchURL) => {
+  const response = await fetch(`${BASE_URL}${searchURL}`);
 
   const dataReceived = await response.json();
-
-  showDataUI(dataReceived);
+  if (searchURL.includes("phones?search")) {
+    showDataUI(dataReceived);
+  } else {
+    showDetailsData(dataReceived);
+  }
 };
 
 // Data Show In UI
@@ -34,6 +41,7 @@ const showDataUI = (dataReceived) => {
   const { status, data } = dataReceived;
 
   if (status === false) {
+    cardContainer.textContent = "";
     searchMessage2.classList.remove("d-none");
     searchMessage1.classList.add("d-none");
     return;
@@ -49,8 +57,15 @@ const showDataUI = (dataReceived) => {
   firstTwentyData(data.slice(0, 20));
 };
 
+// Details Data Show In Modal
+const showDetailsData = (dataReceived) => {
+  console.log(dataReceived);
+};
+
 // First 20 Data Show to UI
 const firstTwentyData = (firstTwentyDataArray) => {
+  // Reset
+  cardContainer.textContent = "";
   console.log(firstTwentyDataArray);
 
   firstTwentyDataArray.forEach((val) => {
@@ -63,7 +78,15 @@ const firstTwentyData = (firstTwentyDataArray) => {
         <p class="card-text">
          Brand Name: ${val.brand}
         </p>
-        <a href="#" class="btn btn-primary">Details</a>
+        <button
+        type="button"
+        id=${val.slug}
+        class="btn btn_detail btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+         Details
+      </button>
       </div>
     </div>
   </div>
