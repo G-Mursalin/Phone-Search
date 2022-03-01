@@ -22,7 +22,6 @@ const btnSeeAll = document.querySelector(".btn_see_all");
 formContainer.addEventListener("submit", (e) => {
   e.preventDefault();
   loadData(`phones?search=${formInput.value.toLowerCase()}`);
-
   formInput.value = "";
 });
 
@@ -80,7 +79,6 @@ const showDetailsData = (dataReceived) => {
   sensorsEl.textContent = "";
   othersInfoEl.textContent = "";
   const { data } = dataReceived;
-  console.log(data);
   const { name, image, releaseDate, others } = data;
   const { storage, displaySize, chipSet, memory, sensors } = data.mainFeatures;
 
